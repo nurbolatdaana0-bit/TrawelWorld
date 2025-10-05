@@ -2,7 +2,11 @@ import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import Booking from "../pages/Booking";
-import Excursions from "./Excursions";
+import Register from "./Register";
+import Excursions from "../pages/Excursions";
+import Login from "./Login";
+
+
 
 import {
   BrowserRouter as Router,
@@ -605,92 +609,13 @@ function Tours() {
 
 
 
-
-
-
-
 {activeTab === "Экскурсии" && (
-  <section className="text-center mt-8 text-lg">
-    <h2 className="text-2xl font-bold mb-6">Популярные экскурсии</h2>
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
-      {[
-        {
-          id: 1,
-          title: "Экскурсия в Боровое",
-          country: "Казахстан",
-          price: "15 000 ₸",
-          img: "https://pibig.info/uploads/posts/2022-11/1668736335_4-pibig-info-p-borovoe-oboi-4.jpg",
-          description: "Поездка к живописным озёрам и горам Борового."
-        },
-        {
-          id: 2,
-          title: "Тур по Великой Китайской стене",
-          country: "Китай",
-          price: "45 000 ₸",
-          img: "https://cdn.getyourguide.com/img/location/5457947d8d6b8.jpeg/99.jpg",
-          description: "Незабываемая прогулка по знаменитой достопримечательности Китая."
-        },
-        {
-          id: 3,
-          title: "Сафари в Кении",
-          country: "Кения",
-          price: "120 000 ₸",
-          img: "https://www.maasaimarakenyapark.com/wp-content/uploads/2019/08/Webp.net-compress-image-58.jpg",
-          description: "Встреча с дикой природой в национальном парке Масаи-Мара."
-        },
-            {
-          id: 3,
-          title: "Медео и Шымбулак",
-          country: "Алматы",
-          price: "15 000 ₸ за человека",
-          img: "https://i.pinimg.com/originals/e0/b3/21/e0b321de627cb5f6187f12ac04eccdf2.jpg",
-          description: "высокогорный каток и горнолыжный курорт"
-        },
-        {
-            id: 4,
-            title: "",
-            country: "",
-            price: "",
-            img: "",
-            description: ""
-          },
-          {
-            id: 5,
-            title: "",
-            country: "",
-            price: "",
-            img: "",
-            description: ""
-          },
-          {
-            id: 6,
-            title: "",
-            country: "",
-            price: "",
-            img: "",
-            description: ""
-          },
-      
-      ].map((excursion) => (
-        <div key={excursion.id} className="border rounded-lg shadow p-4 bg-white">
-          <img
-            src={excursion.img}
-            alt={excursion.title}
-            className="h-40 w-full object-cover rounded-md mb-3"
-          />
-          <h3 className="text-lg font-semibold">{excursion.title}</h3>
-          <p className="text-gray-500">{excursion.country}</p>
-          <p className="text-blue-600 font-bold">{excursion.price}</p>
-          <p className="text-sm mt-2">{excursion.description}</p>
-          <button className="mt-3 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Забронировать
-          </button>
-        </div>
-      ))}
-    </div>
-  </section>
+  <Excursions />
 )}
+
+
+
+
 
      
     </div>
@@ -730,21 +655,6 @@ function Country() {
 }
 
 
-function Login({ loggedIn, setLoggedIn }) {
-  if (loggedIn) {
-    return <Navigate to="/profile" replace />;
-  }
-
-  return (
-    <div className="page">
-      <h2>🔐 Login</h2>
-      <p>Введи свои данные, чтобы войти.</p>
-      <button className="login-btn" onClick={() => setLoggedIn(true)}>
-        Войти
-      </button>
-    </div>
-  );
-}
 
 
 function Profile({ loggedIn }) {
@@ -767,33 +677,34 @@ function App() {
   return (
     <Router>
       <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+  
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} /> {}
-        <Route path="/tours" element={<Tours />} /> {}
-        <Route path="/contact" element={<Contact />} /> {}
-        <Route path="/countries/:id" element={<Country />} /> {}
+        <Route path="/about" element={<About />} />
+        <Route path="/tours" element={<Tours />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/countries/:id" element={<Country />} />
         <Route path="/booking/:id" element={<Booking />} />
         <Route path="/excursions" element={<Excursions />} />
-
-
-
         <Route
           path="/login"
           element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
-        />{" "}
-        {}
-        <Route path="/profile" element={<Profile loggedIn={loggedIn} />} />{" "}
-        {}
+        />
+        <Route
+          path="/profile"
+          element={<Profile loggedIn={loggedIn} />}
+        />
       </Routes>
-    <footer className="bg-gray-800 text-center py-6 mt-10">
-      <p className="text-gray-300 text-sm">
-        © 2025 <span className="font-semibold text-blue-400">TravelWorld</span>.  
-        Ваша безопасность — наш приоритет.
-      </p>
-    </footer>
+  
+      <footer className="bg-gray-800 text-center py-6 mt-10">
+        <p className="text-gray-300 text-sm">
+          © 2025 <span className="font-semibold text-blue-400">TravelWorld</span>.  
+          Ваша безопасность — наш приоритет.
+        </p>
+      </footer>
     </Router>
   );
+  
 }
 
 
